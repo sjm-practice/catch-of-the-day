@@ -1,6 +1,5 @@
 import React, {
   Component,
-  PropTypes,
 } from "react";
 
 class StorePicker extends Component {
@@ -15,8 +14,5 @@ class StorePicker extends Component {
     );
   }
 }
-
-StorePicker.propTypes = {};
-StorePicker.defaultProps = {};
 
 export default StorePicker;
