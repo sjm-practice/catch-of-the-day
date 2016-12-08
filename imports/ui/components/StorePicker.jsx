@@ -1,6 +1,4 @@
-import React, {
-  Component,
-} from "react";
+import React, { PropTypes, Component } from "react";
 import { getFunName } from "../../utils/helpers";
 
 class StorePicker extends Component {
@@ -13,7 +11,9 @@ class StorePicker extends Component {
 
   goToStore(event) {
     event.preventDefault();
-    console.log("input:", this.storePickerInput.value);
+    const storeId = this.storePickerInput.value;
+    console.log("changing route to:", storeId);
+    this.context.router.transitionTo(`/store/${storeId}`);
   }
 
   render() {
@@ -33,5 +33,10 @@ class StorePicker extends Component {
     );
   }
 }
+
+// add the router to context, for access to router later
+StorePicker.contextTypes = {
+  router: PropTypes.object,
+};
 
 export default StorePicker;
