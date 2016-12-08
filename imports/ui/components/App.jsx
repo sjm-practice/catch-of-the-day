@@ -17,7 +17,7 @@ class App extends Component {
   }
 
   addFish(fish) {
-    // save current state (current list of fishes)
+    // save current fishes state (current list of fishes)
     const fishes = { ...this.state.fishes };
     // get timestamp to create a unique key for the new fish
     const timestamp = Date.now();
@@ -34,7 +34,7 @@ class App extends Component {
           <Header tagline="Fresh Seafood Market" />
         </div>
         <Order />
-        <Inventory />
+        <Inventory addFish={this.addFish} />
       </div>
     );
   }
