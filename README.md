@@ -8,4 +8,7 @@ Coding along with React For Beginners tutorial, however using Meteor and adding 
 * [Meteor React Testing Boilerplate](https://github.com/sjm-practice/meteor-react-testing-bp)
 
 ## Notes
-* 
+* start with Meteor React Testing Boilerplate
+* had to add assets (css, fonts, images) from tutorial repo, to public folder
+* need to install specific version of react router (v4 alpha)
+
