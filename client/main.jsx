@@ -1,9 +1,7 @@
-import React from "react";
-import { Meteor } from "meteor/meteor";
 import { render } from "react-dom";
-import App from "../imports/ui/components/App";
-import StorePicker from "../imports/ui/components/StorePicker";
+import { Meteor } from "meteor/meteor";
+import routes from "../imports/config/routes";
 
 Meteor.startup(() => {
-  render(<App />, document.getElementById("render-target"));
+  render(routes, document.getElementById("render-target"));
 });
