@@ -11,4 +11,5 @@ Coding along with React For Beginners tutorial, however using Meteor and adding 
 * start with Meteor React Testing Boilerplate
 * had to add assets (css, fonts, images) from tutorial repo, to public folder
 * need to install specific version of react router (v4 alpha)
-
+* one step in the tutorial saves a reference to a an input component value using ref with a function
+    * an explanation of that can be found [here](https://facebook.github.io/react/docs/refs-and-the-dom.html)
