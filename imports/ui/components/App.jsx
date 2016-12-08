@@ -30,8 +30,9 @@ class App extends Component {
   }
 
   loadSamples() {
-    // will do.
-    console.log(sampleFishes);
+    this.setState({
+      fishes: sampleFishes,
+    });
   }
 
   render() {
