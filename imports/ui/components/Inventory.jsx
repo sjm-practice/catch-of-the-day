@@ -11,7 +11,15 @@ class Inventory extends Component {
   }
 
   handleChange(e, key) {
-    console.log(this.props.fishes[key]);
+    const fish = this.props.fishes[key];
+
+    // take a copy of fish, and update it with new value (using spread,
+    // using spread creates a new object (could have used Object.assign({}, fish)
+    const updatedFish = {
+      ...fish,                           // makes copy of orig fish object
+      [e.target.name]: e.target.value, // overwrites/updates the name property with new value
+    };
+    this.props.updateFish(key, updatedFish);
   }
 
   renderInventory(key) {
@@ -24,7 +32,7 @@ class Inventory extends Component {
           name="name"
           value={fish.name}
           placeholder="Fish name"
-          onChange={(e) => this.handleChange(e, key)}
+          onChange={e => this.handleChange(e, key)}
         />
         <input type="text" name="price" value={fish.price} placeholder="Fish price" />
 
