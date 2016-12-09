@@ -22,11 +22,19 @@ class App extends Component {
   }
 
   componentWillMount() {
+    // this runs right before App is rendered
     this.ref = base.syncState(`${this.props.params.storeId}/fishes`,
       {
         context: this,
         state: "fishes",
       });
+
+    // check if there exists an order in localStorage
+  }
+
+  componentWillUpdate(nextProps, nextState) {
+    localStorage.setItem(`order-${this.props.params.storeId}`,
+      JSON.stringify(nextState.order));
   }
 
   componentWillUnmount() {
@@ -59,6 +67,9 @@ class App extends Component {
     });
   }
 
+  //
+  // NOTE: This should become a container, and create a presentational component
+  //
   render() {
     return (
       <div className="catch-of-the-day">
