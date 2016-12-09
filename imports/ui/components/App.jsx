@@ -1,6 +1,7 @@
 import React, {
   Component,
 } from "react";
+import base from "../../config/base";
 import Header from "./Header";
 import Order from "./Order";
 import Inventory from "./Inventory";
@@ -18,6 +19,18 @@ class App extends Component {
     this.addFish = this.addFish.bind(this);
     this.loadSamples = this.loadSamples.bind(this);
     this.addToOrder = this.addToOrder.bind(this);
+  }
+
+  componentWillMount() {
+    this.ref = base.syncState(`${this.props.params.storeId}/fishes`,
+      {
+        context: this,
+        state: "fishes",
+      });
+  }
+
+  componentWillUnmount() {
+    base.removeBinding(this.ref);
   }
 
   addFish(fish) {
