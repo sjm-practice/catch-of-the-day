@@ -63,7 +63,7 @@ class App extends Component {
             }
           </ul>
         </div>
-        <Order />
+        <Order order={this.state.order} fishes={this.state.fishes} />
         <Inventory addFish={this.addFish} loadSamples={this.loadSamples} />
       </div>
     );

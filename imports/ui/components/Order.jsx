@@ -1,13 +1,14 @@
-import React, {
-  Component,
-} from "react";
+import React from "react";
 
-class Order extends Component {
-  render() {
-    return (
-      <p>Order</p>
-    );
-  }
-}
+const Order = (props) => {
+  const orderIds = Object.keys(props.order);
+
+  return (
+    <div className="order-wrap">
+      <h2>Your Order</h2>
+      <p>{orderIds}</p>
+    </div>
+  );
+};
 
 export default Order;
