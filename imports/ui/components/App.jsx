@@ -1,6 +1,7 @@
 import React, {
   Component,
 } from "react";
+import base from "../../config/base";
 import Header from "./Header";
 import Order from "./Order";
 import Inventory from "./Inventory";
@@ -18,6 +19,33 @@ class App extends Component {
     this.addFish = this.addFish.bind(this);
     this.loadSamples = this.loadSamples.bind(this);
     this.addToOrder = this.addToOrder.bind(this);
+    this.updateFish = this.updateFish.bind(this);
+  }
+
+  componentWillMount() {
+    // this runs right before App is rendered
+    this.ref = base.syncState(`${this.props.params.storeId}/fishes`,
+      {
+        context: this,
+        state: "fishes",
+      });
+
+    // check if there exists an order in localStorage
+    const localStorageRef = localStorage.getItem(`order-${this.props.params.storeId}`);
+    if (localStorageRef) {
+      this.setState({
+        order: JSON.parse(localStorageRef),
+      });
+    }
+  }
+
+  componentWillUpdate(nextProps, nextState) {
+    localStorage.setItem(`order-${this.props.params.storeId}`,
+      JSON.stringify(nextState.order));
+  }
+
+  componentWillUnmount() {
+    base.removeBinding(this.ref);
   }
 
   addFish(fish) {
@@ -46,6 +74,15 @@ class App extends Component {
     });
   }
 
+  updateFish(key, updatedFish) {
+    const fishes = { ...this.state.fishes }; // get copy of current fishes state
+    fishes[key] = updatedFish;
+    this.setState({ fishes });
+  }
+
+  //
+  // NOTE: This should become a container, and create a presentational component
+  //
   render() {
     return (
       <div className="catch-of-the-day">
@@ -64,7 +101,12 @@ class App extends Component {
           </ul>
         </div>
         <Order order={this.state.order} fishes={this.state.fishes} />
-        <Inventory addFish={this.addFish} loadSamples={this.loadSamples} />
+        <Inventory
+          addFish={this.addFish}
+          loadSamples={this.loadSamples}
+          fishes={this.state.fishes}
+          updateFish={this.updateFish}
+        />
       </div>
     );
   }
