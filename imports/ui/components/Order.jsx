@@ -5,6 +5,22 @@ class Order extends Component {
   constructor() {
     super();
     this.renderOrderItem = this.renderOrderItem.bind(this);
+    this.orderTotal = this.orderTotal.bind(this);
+  }
+
+  orderTotal(orderIds) {
+    const total = orderIds.reduce((prevTotal, key) => {
+      const fish = this.props.fishes[key];
+      if (fish && fish.status === "available") {
+        const count = this.props.order[key];
+        // this protects against fish being made unavailable during calculation
+        return prevTotal + (count * fish.price || 0);
+      }
+
+      return prevTotal;
+    }, 0);
+
+    return total;
   }
 
   renderOrderItem(key) {
@@ -25,17 +41,7 @@ class Order extends Component {
 
   render() {
     const orderIds = Object.keys(this.props.order);
-
-    const total = orderIds.reduce((prevTotal, key) => {
-      const fish = this.props.fishes[key];
-      if (fish && fish.status === "available") {
-        const count = this.props.order[key];
-        // this protects against fish being made unavailable during calculation
-        return prevTotal + (count * fish.price || 0);
-      }
-
-      return prevTotal;
-    }, 0);
+    const total = this.orderTotal(orderIds);
 
     return (
       <div className="order-wrap">
