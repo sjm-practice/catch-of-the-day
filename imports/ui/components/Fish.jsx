@@ -2,15 +2,22 @@ import React from "react";
 import { formatPrice } from "../../utils/helpers";
 
 const Fish = (props) => {
+  const { details, index, addToOrder } = props;
+  const isAvailable = details.status === "available";
+  const buttonText = isAvailable ? "Add To Order" : "SOLD OUT";
+
   return (
     <li className="menu-fish">
-      <img src={props.details.image} alt={props.details.name} />
+      <img src={details.image} alt={details.name} />
       <h3 className="fish-name">
-        {props.details.name}
-        <span className="price">{formatPrice(props.details.price)}</span>
+        {details.name}
+        <span className="price">{formatPrice(details.price)}</span>
       </h3>
-      <p>{props.details.desc}</p>
-      <button>Add To Order</button>
+      <p>{details.desc}</p>
+      <button
+        disabled={!isAvailable}
+        onClick={() => addToOrder(index)}
+      >{buttonText}</button>
     </li>
   );
 };
