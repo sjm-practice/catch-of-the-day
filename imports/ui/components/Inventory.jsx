@@ -7,6 +7,11 @@ class Inventory extends Component {
   constructor() {
     super();
     this.renderInventory = this.renderInventory.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleChange(e, key) {
+    console.log(this.props.fishes[key]);
   }
 
   renderInventory(key) {
@@ -14,7 +19,13 @@ class Inventory extends Component {
 
     return (
       <div className="fish-edit" key={key}>
-        <input type="text" name="name" value={fish.name} placeholder="Fish name" />
+        <input
+          type="text"
+          name="name"
+          value={fish.name}
+          placeholder="Fish name"
+          onChange={(e) => this.handleChange(e, key)}
+        />
         <input type="text" name="price" value={fish.price} placeholder="Fish price" />
 
         <select type="text" name="status" value={fish.status} placeholder="Fish status">
