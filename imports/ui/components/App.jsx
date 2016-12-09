@@ -4,6 +4,8 @@ import React, {
 import Header from "./Header";
 import Order from "./Order";
 import Inventory from "./Inventory";
+import sampleFishes from "../../utils/sampleFishes";
+import Fish from "./Fish";
 
 class App extends Component {
   constructor() {
@@ -14,6 +16,7 @@ class App extends Component {
     };
 
     this.addFish = this.addFish.bind(this);
+    this.loadSamples = this.loadSamples.bind(this);
   }
 
   addFish(fish) {
@@ -27,14 +30,26 @@ class App extends Component {
     this.setState({ fishes });
   }
 
+  loadSamples() {
+    this.setState({
+      fishes: sampleFishes,
+    });
+  }
+
   render() {
     return (
       <div className="catch-of-the-day">
         <div className="menu">
           <Header tagline="Fresh Seafood Market" />
+          <ul className="list-of-fishes">
+            {
+              Object.keys(this.state.fishes)
+                .map(key => <Fish key={key} details={this.state.fishes[key]} />)
+            }
+          </ul>
         </div>
         <Order />
-        <Inventory addFish={this.addFish} />
+        <Inventory addFish={this.addFish} loadSamples={this.loadSamples} />
       </div>
     );
   }
