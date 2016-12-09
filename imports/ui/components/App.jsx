@@ -17,6 +17,7 @@ class App extends Component {
 
     this.addFish = this.addFish.bind(this);
     this.loadSamples = this.loadSamples.bind(this);
+    this.addToOrder = this.addToOrder.bind(this);
   }
 
   addFish(fish) {
@@ -28,6 +29,15 @@ class App extends Component {
     fishes[`fish-${timestamp}`] = fish;
     // set the new fishes state
     this.setState({ fishes });
+  }
+
+  addToOrder(index) {
+    // copy state
+    const order = this.state.order;
+    // add new order
+    order[index] = order[index] + 1 || 1;
+    // update state
+    this.setState({ order });
   }
 
   loadSamples() {
