@@ -31,3 +31,4 @@ Coding along with React For Beginners tutorial, however using Meteor and adding 
 * changing routes imperatively: the tutorial, in one case, used .context.router.transitionTo to change the current 
     * note you can do so declaratively, by using a redirect component
     * I could not find formal docs on transitionTo
+* in lesson 19 (localStorage), Wes Passes router params from App to the Order component. I don't see why, it wasn't used there. Perhaps it will be used in a later lesson.

@@ -30,6 +30,12 @@ class App extends Component {
       });
 
     // check if there exists an order in localStorage
+    const localStorageRef = localStorage.getItem(`order-${this.props.params.storeId}`);
+    if (localStorageRef) {
+      this.setState({
+        order: JSON.parse(localStorageRef),
+      });
+    }
   }
 
   componentWillUpdate(nextProps, nextState) {
