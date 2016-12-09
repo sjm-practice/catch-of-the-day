@@ -1,4 +1,5 @@
 import React from "react";
+import { formatPrice } from "../../utils/helpers";
 
 const Order = (props) => {
   const orderIds = Object.keys(props.order);
@@ -17,8 +18,12 @@ const Order = (props) => {
   return (
     <div className="order-wrap">
       <h2>Your Order</h2>
-      <p>{orderIds}</p>
-      <p>Total: {total}</p>
+      <ul className="order">
+        <li className="total">
+          <strong>Total:</strong>
+          {formatPrice(total)}
+        </li>
+      </ul>
     </div>
   );
 };
