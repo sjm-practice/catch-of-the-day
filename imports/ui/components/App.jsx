@@ -23,6 +23,7 @@ class App extends Component {
     this.addToOrder = this.addToOrder.bind(this);
     this.updateFish = this.updateFish.bind(this);
     this.removeFish = this.removeFish.bind(this);
+    this.removeFromOrder = this.removeFromOrder.bind(this);
   }
 
   componentWillMount() {
@@ -83,6 +84,12 @@ class App extends Component {
     this.setState({ fishes });
   }
 
+  removeFromOrder(key) {
+    const order = { ...this.state.order };
+    delete order[key];
+    this.setState({ order });
+  }
+
   updateFish(key, updatedFish) {
     const fishes = { ...this.state.fishes }; // get copy of current fishes state
     fishes[key] = updatedFish;
@@ -109,7 +116,11 @@ class App extends Component {
             }
           </ul>
         </div>
-        <Order order={this.state.order} fishes={this.state.fishes} />
+        <Order
+          order={this.state.order}
+          fishes={this.state.fishes}
+          removeFromOrder={this.removeFromOrder}
+        />
         <Inventory
           addFish={this.addFish}
           loadSamples={this.loadSamples}
