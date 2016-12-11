@@ -34,3 +34,8 @@ Coding along with React For Beginners tutorial, however using Meteor and adding 
 * in lesson 19 (localStorage), Wes Passes router params from App to the Order component. I don't see why, it wasn't used there. Perhaps it will be used in a later lesson.
 * one __useful technique__ used to dynamically update any field of the fish object was used in the Inventory component
     * check out the handleChange method
+    
+## Questions / Suggestions
+* Why not container pattern? Could you create another lesson, refactoring some components?
+* TBD suggest, doing proptypes sooner (right after introducing props)
+    * going back after to update / add to all components more work, not instilling habit

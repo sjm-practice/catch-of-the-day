@@ -1,3 +1,5 @@
+/* global localStorage */
+
 import React, {
   Component,
 } from "react";
@@ -20,6 +22,7 @@ class App extends Component {
     this.loadSamples = this.loadSamples.bind(this);
     this.addToOrder = this.addToOrder.bind(this);
     this.updateFish = this.updateFish.bind(this);
+    this.removeFish = this.removeFish.bind(this);
   }
 
   componentWillMount() {
@@ -72,6 +75,12 @@ class App extends Component {
     this.setState({
       fishes: sampleFishes,
     });
+  }
+
+  removeFish(key) {
+    const fishes = { ...this.state.fishes };
+    fishes[key] = null; // setting to null is done or firebase, else could also use 'delete'
+    this.setState({ fishes });
   }
 
   updateFish(key, updatedFish) {
