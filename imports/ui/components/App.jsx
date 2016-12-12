@@ -1,3 +1,5 @@
+/* global localStorage */
+
 import React, {
   Component,
 } from "react";
@@ -20,6 +22,8 @@ class App extends Component {
     this.loadSamples = this.loadSamples.bind(this);
     this.addToOrder = this.addToOrder.bind(this);
     this.updateFish = this.updateFish.bind(this);
+    this.removeFish = this.removeFish.bind(this);
+    this.removeFromOrder = this.removeFromOrder.bind(this);
   }
 
   componentWillMount() {
@@ -74,6 +78,18 @@ class App extends Component {
     });
   }
 
+  removeFish(key) {
+    const fishes = { ...this.state.fishes };
+    fishes[key] = null; // setting to null is done or firebase, else could also use 'delete'
+    this.setState({ fishes });
+  }
+
+  removeFromOrder(key) {
+    const order = { ...this.state.order };
+    delete order[key];
+    this.setState({ order });
+  }
+
   updateFish(key, updatedFish) {
     const fishes = { ...this.state.fishes }; // get copy of current fishes state
     fishes[key] = updatedFish;
@@ -100,12 +116,17 @@ class App extends Component {
             }
           </ul>
         </div>
-        <Order order={this.state.order} fishes={this.state.fishes} />
+        <Order
+          order={this.state.order}
+          fishes={this.state.fishes}
+          removeFromOrder={this.removeFromOrder}
+        />
         <Inventory
           addFish={this.addFish}
           loadSamples={this.loadSamples}
           fishes={this.state.fishes}
           updateFish={this.updateFish}
+          removeFish={this.removeFish}
         />
       </div>
     );
