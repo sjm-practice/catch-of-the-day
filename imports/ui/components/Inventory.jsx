@@ -3,12 +3,29 @@ import React, {
   PropTypes,
 } from "react";
 import AddFishForm from "./AddFishForm";
+import base from "../../config/base";
 
 class Inventory extends Component {
   constructor() {
     super();
     this.renderInventory = this.renderInventory.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.renderLogin = this.renderLogin.bind(this);
+    this.authenticate = this.authenticate.bind(this);
+    this.authHandler = this.authHandler.bind(this);
+
+    this.state = {
+      uid: null,
+      owner: null,
+    };
+  }
+
+  authenticate(provider) {
+    base.authWithOAuthPopup(provider, this.authHandler);
+  }
+
+  authHandler(err, authData) {
+    console.log({ err, authData });
   }
 
   handleChange(e, key) {
@@ -24,6 +41,18 @@ class Inventory extends Component {
     };
     this.props.updateFish(key, updatedFish);
   }
+
+  renderLogin() {
+    return (
+      <nav className="login">
+        <h2>Inventory</h2>
+        <p>{`Sign in to manage your store's inventory`}</p>
+        <button className="github" onClick={() => this.authenticate("github")}>Login with Github</button>
+        <button className="facebook" onClick={() => this.authenticate("facebook")}>Login with Facebook</button>
+      </nav>
+    );
+  }
+
 
   renderInventory(key) {
     const fish = this.props.fishes[key];
@@ -79,9 +108,29 @@ class Inventory extends Component {
   }
 
   render() {
+    const logOut = <button>Log Out</button>;
+
+    // see if user is logged in
+    if (!this.state.uid) {
+      return (
+        <div>{this.renderLogin()}</div>
+      );
+    }
+
+    // see if user is the owner of the current store
+    if (this.state.uid !== this.state.owner) {
+      return (
+        <div>
+          <p>Sorry, you are not the owner of this store!</p>
+          {logOut}
+        </div>
+      );
+    }
+
     return (
       <div>
         <h2>Inventory</h2>
+        {logOut}
         {Object.keys(this.props.fishes).map(this.renderInventory)}
         <AddFishForm addFish={this.props.addFish} />
         <button onClick={this.props.loadSamples}>Load Samples</button>

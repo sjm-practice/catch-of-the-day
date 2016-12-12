@@ -38,8 +38,67 @@ Coding along with React For Beginners tutorial, however using Meteor and adding 
 * I removed the 'Fold' checkbox / button and rotated view. Wasn't working correctly, and easier to view without it.
 * in some cases (some types of animation) you need to add a key attribute to an element, because react adds a new element before removing the original, and they must be able to be uniquely identified
 * For the most part, the react package CSSTransitionGroup, adds some life cycle hooks for adding and removing css classes as elements are rendered to support animation
+### Authentication
+* relying mostly on firebase authentication
+    * setup via firebase, and the oauth clients you wish to use (ie, Facebook, Github)
+    * then adding buttons, storing userid / owner in state, and wiring up button to firebase auth call
     
 ## Questions / Suggestions
 * Why not container pattern? Could you create another lesson, refactoring some components?
 * TBD suggest, doing proptypes sooner (right after introducing props)
     * going back after to update / add to all components more work, not instilling habit
+    
+## FB Auth Code
+```
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '191520181311590',
+      xfbml      : true,
+      version    : 'v2.6'
+    });
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
+```
+#### Login Status
+```
+FB.getLoginStatus(function(response) {
+    statusChangeCallback(response);
+});
+```
+#### Response Object
+```
+{
+    status: 'connected',
+    authResponse: {
+        accessToken: '...',
+        expiresIn:'...',
+        signedRequest:'...',
+        userID:'...'
+    }
+}
+```
+
+#### Login Button
+```
+<fb:login-button 
+  scope="public_profile,email"
+  onlogin="checkLoginState();">
+</fb:login-button>
+
+/* callback */
+
+function checkLoginState() {
+  FB.getLoginStatus(function(response) {
+    statusChangeCallback(response);
+  });
+}
+```
