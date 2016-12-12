@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { PropTypes, Component } from "react";
 import { formatPrice } from "../../utils/helpers";
 import CSSTransitionGroup from "react-addons-css-transition-group";
 
@@ -47,8 +47,8 @@ class Order extends Component {
             component="span"
             className="count"
             transitionName="count"
-            transitionEnterTimeount={250}
-            transitionLeaveTimeount={250}
+            transitionEnterTimeout={250}
+            transitionLeaveTimeout={250}
           >
             <span key={count}>{count}</span>
           </CSSTransitionGroup>
@@ -83,5 +83,11 @@ class Order extends Component {
     );
   }
 }
+
+Order.propTypes = {
+  fishes: PropTypes.object.isRequired,
+  order: PropTypes.object.isRequired,
+  removeFromOrder: PropTypes.func.isRequired,
+};
 
 export default Order;

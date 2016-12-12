@@ -1,4 +1,4 @@
-import React from "react";
+import React, { PropTypes } from "react";
 import { formatPrice } from "../../utils/helpers";
 
 const Fish = (props) => {
@@ -20,6 +20,12 @@ const Fish = (props) => {
       >{buttonText}</button>
     </li>
   );
+};
+
+Fish.propTypes = {
+  details: PropTypes.object.isRequired,
+  index: PropTypes.string.isRequired,
+  addToOrder: PropTypes.func.isRequired,
 };
 
 export default Fish;
