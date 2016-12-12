@@ -36,6 +36,7 @@ Coding along with React For Beginners tutorial, however using Meteor and adding 
     * check out the handleChange method
 ### Animation
 * I removed the 'Fold' checkbox / button and rotated view. Wasn't working correctly, and easier to view without it.
+* in some cases (some types of animation) you need to add a key attribute to an element, because react adds a new element before removing the original, and they must be able to be uniquely identified
     
 ## Questions / Suggestions
 * Why not container pattern? Could you create another lesson, refactoring some components?
