@@ -37,6 +37,7 @@ Coding along with React For Beginners tutorial, however using Meteor and adding 
 ### Animation
 * I removed the 'Fold' checkbox / button and rotated view. Wasn't working correctly, and easier to view without it.
 * in some cases (some types of animation) you need to add a key attribute to an element, because react adds a new element before removing the original, and they must be able to be uniquely identified
+* For the most part, the react package CSSTransitionGroup, adds some life cycle hooks for adding and removing css classes as elements are rendered to support animation
     
 ## Questions / Suggestions
 * Why not container pattern? Could you create another lesson, refactoring some components?
