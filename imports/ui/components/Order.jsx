@@ -43,8 +43,8 @@ class Order extends Component {
     return (
       <li key={key}>
         <span>{count} {count > 1 ? "lbs" : "lb"} {fish.name}</span>
-        <span className="price">{formatPrice(count * fish.price)}</span>
         {removeButton}
+        <span className="price">{formatPrice(count * fish.price)}</span>
       </li>
     );
   }
