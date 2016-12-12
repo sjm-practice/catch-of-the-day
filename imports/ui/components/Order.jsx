@@ -42,8 +42,18 @@ class Order extends Component {
 
     return (
       <li key={key}>
-        <span>{count} {count > 1 ? "lbs" : "lb"} {fish.name}</span>
-        {removeButton}
+        <span>
+          <CSSTransitionGroup
+            component="span"
+            className="count"
+            transitionName="count"
+            transitionEnterTimeount={250}
+            transitionLeaveTimeount={250}
+          >
+            <span key={count}>{count}</span>
+          </CSSTransitionGroup>
+          {count > 1 ? "lbs" : "lb"} {fish.name} {removeButton}
+        </span>
         <span className="price">{formatPrice(count * fish.price)}</span>
       </li>
     );
