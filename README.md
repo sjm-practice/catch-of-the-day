@@ -42,63 +42,11 @@ Coding along with React For Beginners tutorial, however using Meteor and adding 
 * relying mostly on firebase authentication
     * setup via firebase, and the oauth clients you wish to use (ie, Facebook, Github)
     * then adding buttons, storing userid / owner in state, and wiring up button to firebase auth call
+* ran in to issue with facebook and github oauth: `auth/operation-not-supported-in-this-environment`
+    * SO, using firebase auth with email and password
+    * created a few firebase test users: test@user.com, nikki@test.com, joe@test.com, steve@test.com
     
 ## Questions / Suggestions
 * Why not container pattern? Could you create another lesson, refactoring some components?
 * TBD suggest, doing proptypes sooner (right after introducing props)
     * going back after to update / add to all components more work, not instilling habit
-    
-## FB Auth Code
-```
-<script>
-  window.fbAsyncInit = function() {
-    FB.init({
-      appId      : '191520181311590',
-      xfbml      : true,
-      version    : 'v2.6'
-    });
-  };
-
-  (function(d, s, id){
-     var js, fjs = d.getElementsByTagName(s)[0];
-     if (d.getElementById(id)) {return;}
-     js = d.createElement(s); js.id = id;
-     js.src = "//connect.facebook.net/en_US/sdk.js";
-     fjs.parentNode.insertBefore(js, fjs);
-   }(document, 'script', 'facebook-jssdk'));
-</script>
-```
-#### Login Status
-```
-FB.getLoginStatus(function(response) {
-    statusChangeCallback(response);
-});
-```
-#### Response Object
-```
-{
-    status: 'connected',
-    authResponse: {
-        accessToken: '...',
-        expiresIn:'...',
-        signedRequest:'...',
-        userID:'...'
-    }
-}
-```
-
-#### Login Button
-```
-<fb:login-button 
-  scope="public_profile,email"
-  onlogin="checkLoginState();">
-</fb:login-button>
-
-/* callback */
-
-function checkLoginState() {
-  FB.getLoginStatus(function(response) {
-    statusChangeCallback(response);
-  });
-}
-```

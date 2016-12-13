@@ -638,3 +638,18 @@ input[type=submit].twitter:after {
     text-align: center;
     font-size: 3rem;
 }
+
+/* SJM Custom CSS Here */
+input.custom-login {
+    width: 50%;
+}
+
+button.custom-login {
+    border: 0;
+    display: block;
+    margin-bottom: 2rem;
+    width: 100%;
+    color: #fff;
+    padding: 2rem;
+    background: #2c8dd0;
+}

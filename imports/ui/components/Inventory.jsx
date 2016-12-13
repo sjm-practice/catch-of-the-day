@@ -2,8 +2,9 @@ import React, {
   Component,
   PropTypes,
 } from "react";
-import AddFishForm from "./AddFishForm";
 import base from "../../config/base";
+import FirebaseLogin from "./FirebaseLogin";
+import AddFishForm from "./AddFishForm";
 
 class Inventory extends Component {
   constructor() {
@@ -21,7 +22,13 @@ class Inventory extends Component {
   }
 
   authenticate(provider) {
-    base.authWithOAuthPopup(provider, this.authHandler);
+    console.log("provider:", provider);
+    if (provider === "custom") {
+      console.log("using authWithPassword");
+      base.authWithPassword({ email: "test@user.com", password: "abc123" }, this.authHandler);
+    } else {
+      base.authWithOAuthPopup(provider, this.authHandler);
+    }
   }
 
   authHandler(err, authData) {
@@ -49,6 +56,7 @@ class Inventory extends Component {
         <p>{`Sign in to manage your store's inventory`}</p>
         <button className="github" onClick={() => this.authenticate("github")}>Login with Github</button>
         <button className="facebook" onClick={() => this.authenticate("facebook")}>Login with Facebook</button>
+        <FirebaseLogin />
       </nav>
     );
   }
