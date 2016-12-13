@@ -50,3 +50,5 @@ Coding along with React For Beginners tutorial, however using Meteor and adding 
 * Why not container pattern? Could you create another lesson, refactoring some components?
 * TBD suggest, doing proptypes sooner (right after introducing props)
     * going back after to update / add to all components more work, not instilling habit
+* Using ref= input => ... to get access to input values, instead of using state seems like an anti-pattern 
+    * I thought I recalled at some point seeing, in a doc or console warning, that a certain use of ref was being deprecated (maybe that was if it wasn't a function)
