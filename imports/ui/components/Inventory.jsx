@@ -15,6 +15,7 @@ class Inventory extends Component {
     this.authenticate = this.authenticate.bind(this);
     this.authHandler = this.authHandler.bind(this);
     this.handleLogin = this.handleLogin.bind(this);
+    this.logout = this.logout.bind(this);
 
     this.state = {
       uid: null,
@@ -75,6 +76,14 @@ class Inventory extends Component {
       this.setState({ uid, owner });
     });
   }
+
+  logout() {
+    base.unauth();
+    this.setState({
+      uid: null,
+    });
+  }
+
 
   handleChange(e, key) {
     const fish = this.props.fishes[key];
@@ -157,7 +166,7 @@ class Inventory extends Component {
   }
 
   render() {
-    const logOut = <button>Log Out</button>;
+    const logOut = <button onClick={this.logout}>Log Out</button>;
 
     // see if user is logged in
     if (!this.state.uid) {
