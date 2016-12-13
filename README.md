@@ -53,3 +53,5 @@ Coding along with React For Beginners tutorial, however using Meteor and adding 
 * Using ref= input => ... to get access to input values, instead of using state seems like an anti-pattern 
     * I thought I recalled at some point seeing, in a doc or console warning, that a certain use of ref was being deprecated (maybe that was if it wasn't a function)
 * The logged in user and / or owner, seem like good candidates for context
+* Authenticate / Login should be its own component, and extracted from the Inventory component
+* Inventory component is a mess. should be broken up in to multiple components. 

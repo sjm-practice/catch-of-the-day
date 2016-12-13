@@ -25,6 +25,12 @@ class FirebaseLogin extends Component {
 
   authHandler(err, authData) {
     console.log("Custom Login Response:", { err, authData });
+
+    let uid = null;
+    if (!err) {
+      uid = authData.uid || null;
+    }
+    this.props.handleLogin(uid);
   }
 
   render() {
@@ -51,6 +57,8 @@ class FirebaseLogin extends Component {
   }
 }
 
-FirebaseLogin.propTypes = {};
+FirebaseLogin.propTypes = {
+  handleLogin: PropTypes.func.isRequired,
+};
 
 export default FirebaseLogin;

@@ -14,6 +14,7 @@ class Inventory extends Component {
     this.renderLogin = this.renderLogin.bind(this);
     this.authenticate = this.authenticate.bind(this);
     this.authHandler = this.authHandler.bind(this);
+    this.handleLogin = this.handleLogin.bind(this);
 
     this.state = {
       uid: null,
@@ -33,6 +34,33 @@ class Inventory extends Component {
 
   authHandler(err, authData) {
     console.log({ err, authData });
+    if (err) {
+      console.error("auth error:", err);
+      return;
+    }
+
+    this.handleLogin(authData.user.uid);
+  }
+
+  handleLogin(uid) {
+    if (!uid) {
+      return;
+    }
+
+    // get store info, directly from firebase database - see firebase docs
+    const storeRef = base.database().ref(this.props.storeId);
+    storeRef.once("value", (snapshot) => {
+      // get the store data
+      const data = snapshot.val() || {};
+
+      // if the store does not yet have an owner, assign this user as the owner
+      //  [the first person to log in to any unowned store, becomes the owner]
+      if (!data.owner) {
+        storeRef.set({
+          owner: uid,
+        });
+      }
+    });
   }
 
   handleChange(e, key) {
@@ -56,7 +84,7 @@ class Inventory extends Component {
         <p>{`Sign in to manage your store's inventory`}</p>
         <button className="github" onClick={() => this.authenticate("github")}>Login with Github</button>
         <button className="facebook" onClick={() => this.authenticate("facebook")}>Login with Facebook</button>
-        <FirebaseLogin />
+        <FirebaseLogin handleLogin={this.handleLogin} />
       </nav>
     );
   }
@@ -153,6 +181,7 @@ Inventory.propTypes = {
   removeFish: PropTypes.func.isRequired,
   updateFish: PropTypes.func.isRequired,
   fishes: PropTypes.object.isRequired,
+  storeId: PropTypes.string.isRequired,
 };
 
 export default Inventory;
