@@ -46,6 +46,7 @@ class Inventory extends Component {
     if (!uid) {
       return;
     }
+    let owner = uid;
 
     // get store info, directly from firebase database - see firebase docs
     const storeRef = base.database().ref(this.props.storeId);
@@ -59,7 +60,11 @@ class Inventory extends Component {
         storeRef.set({
           owner: uid,
         });
+      } else {
+        owner = data.owner;
       }
+
+      this.setState({ uid, owner });
     });
   }
 
