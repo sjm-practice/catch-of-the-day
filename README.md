@@ -38,8 +38,21 @@ Coding along with React For Beginners tutorial, however using Meteor and adding 
 * I removed the 'Fold' checkbox / button and rotated view. Wasn't working correctly, and easier to view without it.
 * in some cases (some types of animation) you need to add a key attribute to an element, because react adds a new element before removing the original, and they must be able to be uniquely identified
 * For the most part, the react package CSSTransitionGroup, adds some life cycle hooks for adding and removing css classes as elements are rendered to support animation
+### Authentication
+* relying mostly on firebase authentication
+    * setup via firebase, and the oauth clients you wish to use (ie, Facebook, Github)
+    * then adding buttons, storing userid / owner in state, and wiring up button to firebase auth call
+* ran in to issue with facebook and github oauth: `auth/operation-not-supported-in-this-environment`
+    * SO, using firebase auth with email and password
+    * created a few firebase test users: test@user.com, nikki@test.com, joe@test.com, steve@test.com
+    * __NOTE:__ although I left the github and facebook login buttons in there, they likely do not work
     
 ## Questions / Suggestions
 * Why not container pattern? Could you create another lesson, refactoring some components?
 * TBD suggest, doing proptypes sooner (right after introducing props)
     * going back after to update / add to all components more work, not instilling habit
+* Using ref= input => ... to get access to input values, instead of using state seems like an anti-pattern 
+    * I thought I recalled at some point seeing, in a doc or console warning, that a certain use of ref was being deprecated (maybe that was if it wasn't a function)
+* The logged in user and / or owner, seem like good candidates for context
+* Authenticate / Login should be its own component, and extracted from the Inventory component
+* Inventory component is a mess. should be broken up in to multiple components. 
