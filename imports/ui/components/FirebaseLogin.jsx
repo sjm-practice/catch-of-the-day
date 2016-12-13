@@ -7,13 +7,20 @@ import base from "../../config/base";
 class FirebaseLogin extends Component {
   constructor() {
     super();
-    this.authenticate = this.authenticate.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
     this.authHandler = this.authHandler.bind(this);
   }
 
-  authenticate() {
+  handleSubmit(event) {
+    event.preventDefault();
     console.log("Custom Login Attempt");
-    base.authWithPassword({ email: "test@user.com", password: "abc123" }, this.authHandler);
+    base.authWithPassword(
+      {
+        email: this.email.value,
+        password: this.password.value,
+      },
+      this.authHandler);
+    this.firebaseLoginForm.reset();
   }
 
   authHandler(err, authData) {
@@ -22,11 +29,24 @@ class FirebaseLogin extends Component {
 
   render() {
     return (
-      <div>
-        <input className="custom-login" type="text" placeholder="Email" />
-        <input className="custom-login" type="text" placeholder="Password" />
-        <button className="custom-login" onClick={() => this.authenticate()}>Firebase Login</button>
-      </div>
+      <form
+        ref={(input) => { this.firebaseLoginForm = input; }}
+        onSubmit={this.handleSubmit}
+      >
+        <input
+          ref={(input) => { this.email = input; }}
+          className="custom-login"
+          type="text"
+          placeholder="Email"
+        />
+        <input
+          ref={(input) => { this.password = input; }}
+          className="custom-login"
+          type="text"
+          placeholder="Password"
+        />
+        <button className="custom-login" type="submit">Firebase Login</button>
+      </form>
     );
   }
 }
