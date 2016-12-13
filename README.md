@@ -45,6 +45,7 @@ Coding along with React For Beginners tutorial, however using Meteor and adding 
 * ran in to issue with facebook and github oauth: `auth/operation-not-supported-in-this-environment`
     * SO, using firebase auth with email and password
     * created a few firebase test users: test@user.com, nikki@test.com, joe@test.com, steve@test.com
+    * __NOTE:__ although I left the github and facebook login buttons in there, they likely do not work
     
 ## Questions / Suggestions
 * Why not container pattern? Could you create another lesson, refactoring some components?

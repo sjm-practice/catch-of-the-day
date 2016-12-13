@@ -22,6 +22,14 @@ class Inventory extends Component {
     };
   }
 
+  componentDidMount() {
+    base.onAuth((authData) => {
+      if (authData) {
+        this.handleLogin(authData.uid);
+      }
+    });
+  }
+
   authenticate(provider) {
     console.log("provider:", provider);
     if (provider === "custom") {
